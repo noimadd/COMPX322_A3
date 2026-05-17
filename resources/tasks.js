@@ -124,3 +124,35 @@ export async function updateTaskHandler(req, res) {
         return res.status(500).json({ error: 'Internal server error' });
     }
 }
+
+// DELETE stuff
+
+// delete task via id
+export async function deleteTaskHandler(req, res) {
+    const id = parseInt(req.params.id);
+    if (isNaN(id) || id <= 0) {
+        return res.status(400).json({ error: 'Invalid task ID. ID must be a positive integer.' });
+    }
+
+    try {
+        const taskExists = await getTaskById(id);
+        if (!taskExists) {
+            return res.status(404).json({ error: `No task with ID ${id} found` });
+        }
+
+        await deleteTask(id);
+        return res.status(200).json({ message: `Task with ID ${id} deleted successfully` });
+    } catch (error) {
+        return res.status(500).json({ error: 'Internal server error' });
+    }
+}
+
+// delete all tasks
+export async function deleteAllTasksHandler(req, res) {
+    try {
+        await deleteAllTasks();
+        return res.status(200).json({ message: 'All tasks deleted successfully' });
+    } catch (error) {
+        return res.status(500).json({ error: 'Internal server error' });
+    }
+}
