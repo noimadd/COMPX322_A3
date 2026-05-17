@@ -1,7 +1,10 @@
 import express from 'express';
 import {
     createTaskHandler,
-    getAllTasksHandler
+    getAllTasksHandler,
+    getTaskByIdHandler,
+    getTasksByStatusHandler,
+    getTasksByTitleHandler,
 } from './resources/tasks.js';
 
 // app setup
@@ -19,6 +22,9 @@ app.use(express.static('public'));
 // route stuff
 app.post('/tasks', createTaskHandler);
 app.get('/tasks', getAllTasksHandler);
+app.get('/tasks/:id', getTaskByIdHandler);
+app.get('/tasks/status/:status', getTasksByStatusHandler);
+app.get('/tasks/search/:title', getTasksByTitleHandler);
 
 // start server
 const server = app.listen(PORT, () => {

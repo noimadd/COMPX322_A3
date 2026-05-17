@@ -45,3 +45,51 @@ export async function getAllTasksHandler(req, res) {
         return res.status(500).json({ error: 'Internal server error' });
     }
 }
+
+// get task by id
+export async function getTaskByIdHandler(req, res) {
+    const id = parseInt(req.params.id);
+    if (isNaN(id) || id <= 0) {
+        return res.status(400).json({ error: 'Invalid task ID. ID must be a positive integer.' });
+    }
+
+    try {
+        const task = await getTaskById(id);
+        if (!task) {
+            return res.status(404).json({ error: `No task with ID ${id} found` });
+        }
+        return res.status(200).json(task);
+    } catch (error) {
+        return res.status(500).json({ error: 'Internal server error' });
+    }
+}
+
+// get tasks by status
+export async function getTasksByStatusHandler(req, res) {
+    const status = req.params.status;
+    if (!validStatuses.includes(status)) {
+        return res.status(400).json({ error: `Status is Invalid - It must be one of: ${validStatuses.join(', ')}` });
+    }
+
+    try {
+        const tasks = await getTasksByStatus(status);
+        return res.status(200).json(tasks);
+    } catch (error) {
+        return res.status(500).json({ error: 'Internal server error' });
+    }
+}
+
+// get tasks by title
+export async function getTasksByTitleHandler(req, res) {
+    const title = req.params.title;
+    if (!title || title.trim() === '') {
+        return res.status(400).json({ error: 'A task title is required' });
+    }
+
+    try {
+        const tasks = await getTasksByTitle(title.trim());
+        return res.status(200).json(tasks);
+    } catch (error) {
+        return res.status(500).json({ error: 'Internal server error' });
+    }
+}
