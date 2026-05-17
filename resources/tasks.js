@@ -93,3 +93,34 @@ export async function getTasksByTitleHandler(req, res) {
         return res.status(500).json({ error: 'Internal server error' });
     }
 }
+
+// PUT stuff
+
+// update task via id
+export async function updateTaskHandler(req, res) {
+    const id = parseInt(req.params.id);
+    if (isNaN(id) || id <= 0) {
+        return res.status(400).json({ error: 'Invalid task ID. ID must be a positive integer.' });
+    }
+
+    const { title, course, due_date, priority, status } = req.body;
+    if (!title || !course || !due_date || !priority || !status) {
+        return res.status(400).json({ error: 'Missing required fields' });
+    }
+
+    if (!validStatuses.includes(status)) {
+        return res.status(400).json({ error: `Status is Invalid - It must be one of: ${validStatuses.join(', ')}` });
+    }
+
+    try {
+        const taskExists = await getTaskById(id);
+        if (!taskExists) {
+            return res.status(404).json({ error: `No task with ID ${id} found` });
+        }
+
+        await updateTask(id, title, course, due_date, priority, status);
+        return res.status(200).json({ message: `Task with ID ${id} updated successfully` });
+    } catch (error) {
+        return res.status(500).json({ error: 'Internal server error' });
+    }
+}

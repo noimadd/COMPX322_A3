@@ -5,6 +5,7 @@ import {
     getTaskByIdHandler,
     getTasksByStatusHandler,
     getTasksByTitleHandler,
+    updateTaskHandler,
 } from './resources/tasks.js';
 
 // app setup
@@ -25,6 +26,7 @@ app.get('/tasks', getAllTasksHandler);
 app.get('/tasks/:id', getTaskByIdHandler);
 app.get('/tasks/status/:status', getTasksByStatusHandler);
 app.get('/tasks/search/:title', getTasksByTitleHandler);
+app.put('/tasks/:id', updateTaskHandler);
 
 // start server
 const server = app.listen(PORT, () => {
