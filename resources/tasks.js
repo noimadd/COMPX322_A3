@@ -32,15 +32,3 @@ export async function createTaskHandler(req, res) {
         return res.status(500).json({ error: 'Internal server error' });
     }
 }
-
-// GET stuff
-
-// get all tasks
-export async function getAllTasksHandler(req, res) {
-    try {
-        const tasks = await getAllTasks();
-        return res.status(200).json(tasks);
-    } catch (error) {
-        return res.status(500).json({ error: 'Internal server error' });
-    }
-}
