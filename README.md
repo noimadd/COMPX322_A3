@@ -5,7 +5,7 @@
 ## example .env
 PORT=3000
 
-MYSQL_HOST='host'
-MYSQL_USER='user'
-MYSQL_PASSWORD='password'
-MYSQL_DATABASE='database'
+MYSQL_HOST=localhost
+MYSQL_USER=root
+MYSQL_PASSWORD=password
+MYSQL_DATABASE=322_assn_3
