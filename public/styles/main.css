@@ -15,14 +15,25 @@
     --border: oklch(0.635 0.0074 286.19 / 0.5);
 
     /* alt colours */
-    --close: oklch(0.65 0.18 25 / 0.12);
     --gilded-gold: oklch(0.7665 0.1387 91.06);
 
     /* text colours */
     --text: oklch(0.9212 0.0093 264.06);
     --text-muted: oklch(0.7136 0.0053 240.19);
     --text-alt: oklch(0.704 0.04 256.788);
-    --close-text: oklch(0.65 0.18 25 / 0.8);
+
+    /* endpoint item colours */
+    --post: oklch(0.65 0.15 155 / 0.15);
+    --post-text: oklch(0.75 0.15 155);
+
+    --get: oklch(0.65 0.12 240 / 0.15);
+    --get-text: oklch(0.75 0.12 240);
+
+    --put: oklch(0.75 0.15 80 / 0.15);
+    --put-text: oklch(0.8 0.14 80);
+
+    --delete: oklch(0.65 0.18 25 / 0.15);
+    --delete-text: oklch(0.75 0.15 25);
 }
 
 body {
@@ -34,6 +45,12 @@ body {
     flex-direction: column;
     scroll-behavior: smooth;
     justify-content: space-between;
+    background: linear-gradient(
+        120deg,
+        oklch(0.16 0.008 260) 0%,
+        oklch(0.19 0.012 250) 40%,
+        var(--bg-dark)
+    );
 }
 
 #background {
@@ -47,32 +64,155 @@ body {
     overflow: hidden; 
 }
 
-#top-left-hex {
-    position: absolute; 
-    top: -20px; 
-    left: -20px;
-}
-
-#bottom-right-hex {
-    position: absolute; 
-    bottom: -20px; 
-    right: -40px; 
-    transform: rotate(180deg);
-}
-
-body {
-    font-family: var(--primary-font);
+.main-layout {
     line-height: 1.6;
     color: var(--text);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background: linear-gradient(
-        120deg,
-        oklch(0.16 0.008 260) 0%,
-        oklch(0.19 0.012 250) 40%,
-        var(--bg-dark)
-    );
-    max-width: 80vw;
+    max-width: 60vw;
     margin: 0 auto;
+    padding-top: 2rem;
+}
+
+h2 {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--gilded-gold);
+}
+
+/* top section */
+.heading {
+    text-align: center;
+}
+
+.heading h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: var(--gilded-gold);
+}
+
+
+
+
+
+/* middle section */
+/* contains all endpoint descriptions */
+/* generic */
+.endpoints {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+/* individual endpoint items */
+.endpoint-items {
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+.endpoint-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.25rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text);
+    margin: auto 0;
+}
+
+.badge-post {
+    background-color: var(--post);
+    color: var(--post-text);
+    border: 1px solid var(--post-text);
+}
+
+.badge-get {
+    background-color: var(--get);
+    color: var(--get-text);
+    border: 1px solid var(--get-text);
+}
+
+.badge-put {
+    background-color: var(--put);
+    color: var(--put-text);
+    border: 1px solid var(--put-text);
+}
+
+.badge-delete {
+    background-color: var(--delete);
+    color: var(--delete-text);
+    border: 1px solid var(--delete-text);
+}
+
+.endpoint-path {
+    padding-left: 0.25rem;
+}
+
+.endpoint-description {
+    color: var(--text-muted);
+}
+
+
+
+
+/* testing section */
+/* generic */
+.tests {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+    margin-bottom: 5rem;
+    gap: 1.5rem;
+}
+
+/* individual test items */
+.test {
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.test-header {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.test-information {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.test-request, .test-result {
+    flex: 1;
+    margin-top: 0.5rem;
+}
+
+.test-request h3, .test-result h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--gilded-gold);
+}
+
+.test-request p, .test-result p {
+    color: var(--text-alt);
 }

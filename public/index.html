@@ -9,9 +9,208 @@
     </head>
     <body>
         <div class="main-layout">
-            <h1>Student Study Planner API</h1>
-            <p>Welcome to the Student Study Planner API!</p>
-            <p>This API allows you to manage your study schedule, track your progress, and stay organised throughout your studies!</p>
+            <section class="heading">
+                <h1>Student Study Planner API</h1>
+                <p>Welcome to the Student Study Planner API!</p>
+                <p>This API allows you to manage your study schedule, track your progress, and stay organised throughout your studies!</p>
+            </section>
+
+            <section class="endpoints">
+                <h2>API Endpoints</h2>
+                <div class="endpoint-items">
+                    <div class="badge badge-post">
+                        POST
+                    </div>
+                    <div class="endpoint-info">
+                        <div class="endpoint-path">
+                            /tasks
+                        </div>
+                        <div class="endpoint-description">
+                            Create a new task. Requires a JSON body containing the task details (title, course, due_date, priority, status).
+                        </div>
+                    </div>
+                </div>
+                <div class="endpoint-items">
+                    <div class="badge badge-get">
+                        GET
+                    </div>
+                    <div class="endpoint-info">
+                        <div class="endpoint-path">
+                            /tasks
+                        </div>
+                        <div class="endpoint-description">
+                            Retrieves all tasks.
+                        </div>
+                    </div>
+                </div>
+                <div class="endpoint-items">
+                    <div class="badge badge-get">
+                        GET
+                    </div>
+                    <div class="endpoint-info">
+                        <div class="endpoint-path">
+                            /tasks/:id
+                        </div>
+                        <div class="endpoint-description">
+                            Retrieves a single task by its unique ID. Replace :id with a valid task ID.
+                        </div>
+                    </div>
+                </div>
+                <div class="endpoint-items">
+                    <div class="badge badge-get">
+                        GET
+                    </div>
+                    <div class="endpoint-info">
+                        <div class="endpoint-path">
+                            /tasks/status/:status
+                        </div>
+                        <div class="endpoint-description">
+                            Retrieves tasks by their status (pending, in-progress, completed). Replace :status with the desired status.
+                        </div>
+                    </div>
+                </div>
+                <div class="endpoint-items">
+                    <div class="badge badge-get">
+                        GET
+                    </div>
+                    <div class="endpoint-info">
+                        <div class="endpoint-path">
+                            /tasks/search/:title
+                        </div>
+                        <div class="endpoint-description">
+                            Searches for tasks by title. Replace :title with a keyword to search for in task titles. Note: This can be a partial match
+                        </div>
+                    </div>
+                </div>
+                <div class="endpoint-items">
+                    <div class="badge badge-put">
+                        PUT
+                    </div>
+                    <div class="endpoint-info">
+                        <div class="endpoint-path">
+                            /tasks/:id
+                        </div>
+                        <div class="endpoint-description">
+                            Updates a task by its unique ID. Replace :id with a valid task ID. Requires a JSON body containing the updated task details (title, course, due_date, priority, status).
+                        </div>
+                    </div>
+                </div>
+                <div class="endpoint-items">
+                    <div class="badge badge-delete">
+                        DELETE
+                    </div>
+                    <div class="endpoint-info">
+                        <div class="endpoint-path">
+                            /tasks/:id
+                        </div>
+                        <div class="endpoint-description">
+                            Deletes a task by its unique ID. Replace :id with a valid task ID.
+                        </div>
+                    </div>
+                </div>
+                <div class="endpoint-items">
+                    <div class="badge badge-delete">
+                        DELETE
+                    </div>
+                    <div class="endpoint-info">
+                        <div class="endpoint-path">
+                            /tasks
+                        </div>
+                        <div class="endpoint-description">
+                            Deletes all tasks from the planner. Note: This action cannot be undone <strong>BE CAREFUL</strong>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="tests">
+                <h2>Test Endpoints</h2>
+
+                <div class="test">
+                    <div class="test-header">
+                        <div class="badge badge-get">
+                            GET
+                        </div>
+                        <div class="test-title">
+                            Search By Keyword - "Finish"
+                        </div>
+                    </div>
+                    <div class="test-information">
+                        <div class="test-request">
+                            <h3>
+                                Request:
+                            </h3>
+                            <p>
+                                GET /tasks/search/Finish
+                            </p>
+                        </div>
+                        <div class="test-result">
+                            <h3>
+                                Result:
+                            </h3>
+                            <p>
+                                Returns a JSON array of tasks whose title contain 'Finish'. If there are no matches, an empty array is returned.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="test">
+                    <div class="test-header">
+                        <div class="badge badge-get">
+                            GET
+                        </div>
+                        <div class="test-title">
+                            Filter By Status - "todo"
+                        </div>
+                    </div>
+                    <div class="test-information">
+                        <div class="test-request">
+                            <h3>
+                                Request:
+                            </h3>
+                            <p>
+                                GET /tasks/status/todo
+                            </p>
+                        </div>
+                        <div class="test-result">
+                            <h3>
+                                Result:
+                            </h3>
+                            <p>
+                                Returns a JSON array of tasks whose status is 'todo'. If there are no matches, an empty array is returned.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="test">
+                    <div class="test-header">
+                        <div class="badge badge-get">
+                            GET
+                        </div>
+                        <div class="test-title">
+                            Error - Non-existent ID
+                        </div>
+                    </div>
+                    <div class="test-information">
+                        <div class="test-request">
+                            <h3>
+                                Request:
+                            </h3>
+                            <p>
+                                GET /tasks/9999
+                            </p>
+                        </div>
+                        <div class="test-result">
+                            <h3>
+                                Result:
+                            </h3>
+                            <p>
+                                Returns a 404 status code with the error message {"error": "No task with ID 9999 found"}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
     </body>
 </html>
