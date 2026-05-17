@@ -1,4 +1,3 @@
-import { parse } from 'dotenv';
 import {
     createTask,
     getAllTasks,
