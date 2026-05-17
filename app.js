@@ -1,6 +1,7 @@
 import express from 'express';
 import {
     createTaskHandler,
+    getAllTasksHandler
 } from './resources/tasks.js';
 
 // app setup
@@ -17,6 +18,7 @@ app.use(express.static('public'));
 
 // route stuff
 app.post('/tasks', createTaskHandler);
+app.get('/tasks', getAllTasksHandler);
 
 // start server
 const server = app.listen(PORT, () => {

@@ -1,3 +1,4 @@
+import { parse } from 'dotenv';
 import {
     createTask,
     getAllTasks,
@@ -28,6 +29,18 @@ export async function createTaskHandler(req, res) {
     try {
         const result = await createTask(title, course, due_date, priority, status);
         return res.status(201).json({ message: 'Task created successfully', id: result.insertId, title, course, due_date, priority, status });
+    } catch (error) {
+        return res.status(500).json({ error: 'Internal server error' });
+    }
+}
+
+// GET stuff
+
+// get all tasks
+export async function getAllTasksHandler(req, res) {
+    try {
+        const tasks = await getAllTasks();
+        return res.status(200).json(tasks);
     } catch (error) {
         return res.status(500).json({ error: 'Internal server error' });
     }
